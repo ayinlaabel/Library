@@ -7,15 +7,16 @@ const passport = require('passport')
 
 //INPORT MODEL
 const User = require('../models/users');
+const { route } = require('../routes');
 
 //CONTROLLER FOR GET
 
 exports.getSignup = (req, res, next) => {
-    console.log('User Route working... ... ...')
+  res.send('route is okay')
   }
 
   //Login Controller
-  exports.getLogin = (req, res, next)=> res.render('login');
+  exports.getLogin = (req, res, next)=> res.send('route is okay');
 
 //CONTROLLER FOR POST
 
