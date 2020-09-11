@@ -18,5 +18,6 @@ router.get('/addBook', ctrl.addBook);
 router.post('/signup', ctrl.postSignup);
 router.post('/login', ctrl.postLogin);
 router.post('/addBook', ctrl.postAddBook);
+router.post('/addChapter/:id', ctrl.postChapters);
 
 module.exports = router;

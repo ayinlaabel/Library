@@ -66,26 +66,26 @@ exports.logout = (req, res, next) => {
 //AddBook Controller
 exports.addBook = (req, res, next) => res.send('route is Okay')
 exports.postAddBook = async(req, res, next) => {
-  Book.find({_id:req.body.id}).then(
-    (results) => {
-      if (results.length === 0) return res.send('nothing to show')
+  // Book.find({_id:req.body.id}).then(
+  //   (results) => {
+  //     if (results.length === 0) return res.send('nothing to show')
         
       
 
-      let book = result[0];
+  //     let book = result[0];
 
-      const newChapter = new Chapter({
-        ids: req.body.chapterId,
-        title: req.body.chapterTile,
-        body: req.body.body
+  //     const newChapter = new Chapter({
+  //       ids: req.body.chapterId,
+  //       title: req.body.chapterTile,
+  //       body: req.body.body
     
-      }); 
-      book.chapter.push(newChapter);
+  //     }); 
+  //     book.chapter.push(newChapter);
 
-      console.log(book);
+  //     console.log(book);
     
-  }
-  )
+  // }
+  // )
 //  const chapter = new Chapter({
 //     ids: req.body.chapterId,
 //     title: req.body.chapterTile,
@@ -98,22 +98,45 @@ exports.postAddBook = async(req, res, next) => {
   // }
   
 
-  // const book = new Book({
-  //   title: req.body.title,
-  //   author: req.body.author,
-  //   summary: req.body.summary,
-  //   image: 'waiting .......',
-  //   chapter: chapter
-  // });
+  const book = new Book({
+    title: req.body.title,
+    author: req.body.author,
+    summary: req.body.summary,
+    image: 'waiting .......'
+    // chapter: chapter
+  });
 
   // console.log(chapter)
-  // book.save().then(
-  //   () =>{
-  //     res.redirect('/')   
-  //   }
-  // ).catch(
-  //   (err) => {
-  //     res.send(err)
-  //   }
-  // )
+  book.save().then(
+    () =>{
+      res.redirect('/')   
+    }
+  ).catch(
+    (err) => {
+      res.send(err)
+    }
+  )
+}
+
+
+exports.postChapters = async(req, res, next) => {
+    Book.find({_id:req.params.id}).then(
+    (results) => {
+      if (results.length === 0) return res.send('nothing to show')
+        
+
+      let book = results[0];
+
+      const newChapter = new Chapter({
+        ids: req.body.chapterId,
+        title: req.body.chapterTitle,
+        body: req.body.body
+    
+      }); 
+      book.chapter.push(newChapter);
+      book.save()
+      console.log(book);
+    
+  }
+  )
 }
