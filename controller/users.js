@@ -7,7 +7,8 @@ const passport = require('passport')
 
 //INPORT MODEL
 const User = require('../models/users');
-const { route } = require('../routes');
+const Book = require('../models/books');
+const Chapter = require('../models/chapters');
 
 //CONTROLLER FOR GET
 
@@ -60,3 +61,59 @@ exports.logout = (req, res, next) => {
     req.flash('success', 'Logout Successful');
     res.redirect('/users/login');
   }
+
+
+//AddBook Controller
+exports.addBook = (req, res, next) => res.send('route is Okay')
+exports.postAddBook = async(req, res, next) => {
+  Book.find({_id:req.body.id}).then(
+    (results) => {
+      if (results.length === 0) return res.send('nothing to show')
+        
+      
+
+      let book = result[0];
+
+      const newChapter = new Chapter({
+        ids: req.body.chapterId,
+        title: req.body.chapterTile,
+        body: req.body.body
+    
+      }); 
+      book.chapter.push(newChapter);
+
+      console.log(book);
+    
+  }
+  )
+//  const chapter = new Chapter({
+//     ids: req.body.chapterId,
+//     title: req.body.chapterTile,
+//     body: req.body.body
+
+//   }); 
+  
+  // if(req.body.chapterId > 1 ) {
+  //   chapter.push()
+  // }
+  
+
+  // const book = new Book({
+  //   title: req.body.title,
+  //   author: req.body.author,
+  //   summary: req.body.summary,
+  //   image: 'waiting .......',
+  //   chapter: chapter
+  // });
+
+  // console.log(chapter)
+  // book.save().then(
+  //   () =>{
+  //     res.redirect('/')   
+  //   }
+  // ).catch(
+  //   (err) => {
+  //     res.send(err)
+  //   }
+  // )
+}
