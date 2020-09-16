@@ -9,6 +9,7 @@ const passport = require('passport')
 const User = require('../models/users');
 const Book = require('../models/books');
 const Chapter = require('../models/chapters');
+// const books = require('../models/books');
 
 //CONTROLLER FOR GET
 
@@ -138,5 +139,17 @@ exports.postChapters = async(req, res, next) => {
       console.log(book);
     
   }
+  )
+}
+
+exports.getBooks = (req, res, next) => {
+  Book.find({}).then(
+    (books) => {
+      res.json(books)
+    }
+  ).catch(
+    (err) => {
+      console.log(err)
+    }
   )
 }

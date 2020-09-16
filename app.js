@@ -11,6 +11,8 @@ const expressValidator = require('express-validator');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const passport = require('passport');
+const cors = require('cors');
+
 
 mongoose.connect(config.database, { useUnifiedTopology: true, useNewUrlParser: true });
 
@@ -25,8 +27,13 @@ db.on('open', ()=> {
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var booksRouter = require('./routes/books');
 
 var app = express();
+
+//Setup Cors
+app.use(cors());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -85,6 +92,7 @@ app.get('*', function(req, res, next){
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/books', booksRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
