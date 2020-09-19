@@ -4,6 +4,10 @@ var router = express.Router();
 //IMPORT MDOELS
 const Book = require('../models/books');
 
+
+//IMPORT CONTROLLER
+const ctrl = require('../controller/index');
+
 /* GET home page. */
 router.get('/', (req, res, next) => {
   Book.find({}).then(
@@ -19,5 +23,7 @@ router.get('/', (req, res, next) => {
     }
   )
 });
+
+router.get('/nav', ctrl.getUserDetails)
 
 module.exports = router;

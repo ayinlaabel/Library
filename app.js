@@ -9,12 +9,12 @@ const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const expressValidator = require('express-validator');
 const mongoose = require('mongoose');
-const config = require('./config/database');
 const passport = require('passport');
 const cors = require('cors');
+const config = require('config');
 
-
-mongoose.connect(config.database, { useUnifiedTopology: true, useNewUrlParser: true });
+const mongoURL = config.get("mongoDB");
+mongoose.connect(mongoURL, { useUnifiedTopology: true, useNewUrlParser: true });
 
 const db = mongoose.connection;
 

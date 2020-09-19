@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+import { Todo } from 'src/app/models/todo';
+import { TodoService } from 'src/app/services/todo.service';
 
 // core components
 import {
@@ -16,15 +18,22 @@ import {
 })
 export class DashboardComponent implements OnInit {
 
+  todos: Todo[];
   public datasets: any;
   public data: any;
   public salesChart;
   public clicked: boolean = true;
   public clicked1: boolean = false;
 
-  constructor() { }
+  constructor(private todoService: TodoService) { }
 
   ngOnInit() {
+
+    this.todoService.getTodo().subscribe({
+      next: todos => this.todos = todos,
+      error: err => console.log(err)      
+    })
+
 
     this.datasets = [
       [0, 20, 10, 30, 15, 40, 20, 60, 60],
