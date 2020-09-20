@@ -1,0 +1,10 @@
+<div class="col-lg-3 col-md-6" *ngFor="let book of filteredBooks">
+    <button type="button" placement="top-center" triggers="hover focus click" ngbTooltip="{{copy === 'active-40' ? 'Copied':'Copy to clipboard'}}"  class="btn-icon-clipboard" ngxClipboard [cbContent]="'active-40'" (cbOnSuccess) = "copy = 'active-40'">
+      <div>
+        <i class="ni ni-active-40"></i>
+        <span>{{ book.title}}</span>
+      </div>
+    </button>
+  </div>
+
+  

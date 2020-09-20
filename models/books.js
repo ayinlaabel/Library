@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Chapter = require('./chapters');
+const chapterSchema = mongoose.model('Chapter').schema;
 
 
 const bookSchema = mongoose.Schema({
@@ -16,7 +18,8 @@ const bookSchema = mongoose.Schema({
     summary:{
         type: String,
         require: true
-    }
+    },
+    chapter:[chapterSchema]
 });
 
-const Books = module.exports = mongoose.model('Books', bookSchema);
+const Book = module.exports = mongoose.model('Book', bookSchema);

@@ -15,6 +15,7 @@ module.exports = (passport) => {
             if (err) throw err;
 
             if (!user) {
+                console.log('No User Found!');
                 return done(null, false, {message: 'No User Found!'});
             }
 
@@ -23,8 +24,10 @@ module.exports = (passport) => {
                 if (err) throw err;
 
                 if(isMatch){
-                    return done(null, user);
+                    res.status(200).json(user)
+                    // return done(null, user);
                 } else{
+                    console.log(err)
                     return done(null, false, {message: 'Incorrect Password!'});
                 }
             });
